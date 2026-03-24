@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>แผนการจัดการเรียนรู้ดิจิทัล: เซตและการดำเนินการ</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;600;700&family=Sarabun:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- MathJax -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <style>
+        body { font-family: 'Sarabun', sans-serif; background-color: #f0fdf4; }
+        h1, h2, h3, h4, h5, h6, .font-prompt { font-family: 'Prompt', sans-serif; }
+        .math-display { overflow-x: auto; overflow-y: hidden; }
+
+        /* Animation Classes */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in {
+            animation: fadeInUp 0.6s ease-out forwards;
+            opacity: 0;
+        }
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+        .delay-400 { animation-delay: 0.4s; }
+        
+        /* Custom Button Transitions */
+        .btn-set {
+            transition: all 0.3s ease;
+        }
+        .btn-set:active {
+            transform: scale(0.95);
+        }
+    </style>
+</head>
+<body class="text-gray-800 pb-20">
+
+    <!-- Navbar -->
+    <nav class="bg-green-800 text-white p-4 shadow-md sticky top-0 z-50">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <i class="fa-solid fa-leaf text-2xl text-yellow-300"></i>
+                <div>
+                    <span class="font-bold text-lg font-prompt block leading-tight">Digital Lesson Plan</span>
+                    <span class="text-xs text-green-200">Active Learning & Technology Integration</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mx-auto max-w-5xl p-4 md:p-8 my-6 bg-white shadow-xl rounded-xl border border-gray-200 animate-fade-in">
+        
+        <!-- Header: School & Teacher Info -->
+        <header class="border-b-4 border-green-600 pb-6 mb-8">
+            <div class="flex flex-col md:flex-row justify-between items-start gap-6">
+                <div class="flex-1">
+                    <h5 class="text-green-600 font-bold uppercase tracking-wide text-sm mb-1">กลุ่มสาระการเรียนรู้คณิตศาสตร์</h5>
+                    <h1 class="text-3xl md:text-4xl font-bold text-gray-900 font-prompt">โรงเรียนห้องสอนศึกษา ในพระอุปถัมภ์ฯ</h1>
+                    <div class="mt-4 space-y-1">
+                        <h2 class="text-2xl font-bold text-gray-800">เรื่อง เซตและการดำเนินการ</h2>
+                        <h3 class="text-lg text-gray-500 font-light">(Sets and Operations)</h3>
+                    </div>
+                </div>
+                
+                <div class="bg-green-50 p-5 rounded-xl border border-green-100 min-w-[280px] shadow-sm hover:shadow-md transition">
+                    <div class="flex items-center gap-3 mb-2 border-b border-green-200 pb-2">
+                        <div class="bg-green-600 text-white w-8 h-8 rounded-full flex items-center justify-center"><i class="fa-solid fa-user-tie"></i></div>
+                        <div>
+                            <p class="text-xs text-gray-500">ครูผู้สอน</p>
+                            <p class="font-bold text-green-900">นางกรุณา สมบูรณ์</p>
+                        </div>
+                    </div>
+                    <div class="space-y-2 text-sm text-gray-700">
+                        <p class="flex justify-between"><span><i class="fa-solid fa-book mr-2 text-green-500"></i>วิชา:</span> <span class="font-bold">คณิตศาสตร์พื้นฐานวิทย์</span></p>
+                        <p class="flex justify-between"><span><i class="fa-solid fa-layer-group mr-2 text-green-500"></i>ชั้น:</span> <span class="font-bold">มัธยมศึกษาปีที่ 4</span></p>
+                        <p class="flex justify-between"><span><i class="fa-solid fa-calendar-alt mr-2 text-green-500"></i>ภาคเรียน:</span> <span class="font-bold">ภาคเรียนที่ 1</span></p>
+                        <p class="flex justify-between"><span><i class="fa-regular fa-clock mr-2 text-green-500"></i>เวลา:</span> <span class="font-bold">2 คาบ (100 นาที)</span></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Innovation Link & Download Button -->
+            <div class="mt-6 p-4 bg-gradient-to-r from-emerald-500 to-green-700 rounded-lg text-white shadow-lg flex flex-col md:flex-row items-center justify-between gap-4 relative overflow-hidden group">
+                <div class="absolute inset-0 bg-white opacity-0 group-hover:opacity-10 transition duration-500"></div>
+                <div class="flex items-center gap-4 z-10">
+                    <div class="bg-white/20 p-3 rounded-full backdrop-blur-sm shadow-inner">
+                        <i class="fa-solid fa-laptop-code text-2xl animate-pulse"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-lg font-prompt">สื่อการสอนนวัตกรรม (Web Application)</h3>
+                        <p class="text-green-100 text-sm">MathSet Master: Venn Diagram Challenge</p>
+                    </div>
+                </div>
+                
+                <div class="flex flex-col sm:flex-row gap-3 w-full md:w-auto z-10">
+                    <a href="#" target="_blank" class="bg-white/20 border border-white/50 text-white px-5 py-2 rounded-full font-bold hover:bg-white/30 transition shadow-md flex items-center justify-center text-sm backdrop-blur-sm whitespace-nowrap">
+                        <i class="fa-brands fa-google-drive mr-2"></i> ดาวน์โหลดแผนฯ
+                    </a>
+                    
+                    <a href="#" target="_blank" class="bg-white text-green-700 px-6 py-2 rounded-full font-bold hover:bg-green-50 transition shadow-md transform hover:scale-105 flex items-center justify-center whitespace-nowrap">
+                        <i class="fa-solid fa-play mr-2"></i> เปิดใช้งาน App
+                    </a>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            
+            <!-- Left Column: Info & Standards -->
+            <div class="lg:col-span-1 space-y-6">
+                <!-- Learning Standards -->
+                <div class="bg-orange-50 p-5 rounded-lg border-l-4 border-orange-500 shadow-sm animate-fade-in delay-100">
+                    <h3 class="font-bold text-lg text-orange-800 mb-3 font-prompt">
+                        <i class="fa-solid fa-scroll mr-2"></i> มาตรฐานการเรียนรู้และตัวชี้วัด
+                    </h3>
+                    <p class="text-sm text-gray-700 leading-relaxed text-justify">
+                        <b>มาตรฐาน ค 1.1:</b> เข้าใจความหลากหลายของการแสดงจำนวน ระบบจำนวน การดำเนินการของจำนวน ผลที่เกิดขึ้นจากการดำเนินการ สมบัติของการดำเนินการ และนำไปใช้<br><br>
+                        <b>ตัวชี้วัด ค 1.1 ม.4/1:</b> เข้าใจและใช้ความรู้เกี่ยวกับเซตและตรรกศาสตร์เบื้องต้น ในการสื่อสารและสื่อความหมายทางคณิตศาสตร์ <b>เพื่อนำไปใช้แก้ปัญหาที่พบในชีวิตจริงได้อย่างถูกต้อง</b>
+                    </p>
+                </div>
+
+                <!-- Animated Interactive Concept Media -->
+                <div class="bg-white p-5 rounded-lg border border-gray-200 shadow-md animate-fade-in delay-200">
+                    <h3 class="font-bold text-lg text-gray-800 mb-3 font-prompt flex items-center justify-between">
+                        <div><i class="fa-solid fa-wand-magic-sparkles text-green-600 mr-2"></i> สื่อเคลื่อนไหวโต้ตอบ</div>
+                        <span class="text-[10px] bg-green-100 text-green-700 px-2 py-1 rounded-full animate-bounce">ทดลองกด!</span>
+                    </h3>
+                    
+                    <!-- SVG Animated Venn Diagram -->
+                    <div class="w-full bg-gray-50 rounded-lg p-3 mb-4 border border-gray-200 shadow-inner overflow-hidden">
+                        <svg viewBox="0 0 300 200" class="w-full h-auto drop-shadow-sm">
+                            <defs>
+                                <mask id="mask-a"><circle cx="110" cy="100" r="55" fill="white" /></mask>
+                                <mask id="mask-b"><circle cx="190" cy="100" r="55" fill="white" /></mask>
+                                <mask id="mask-not-a">
+                                    <rect width="100%" height="100%" fill="white" />
+                                    <circle cx="110" cy="100" r="55" fill="black" />
+                                </mask>
+                                <mask id="mask-not-b">
+                                    <rect width="100%" height="100%" fill="white" />
+                                    <circle cx="190" cy="100" r="55" fill="black" />
+                                </mask>
+                                <mask id="mask-not-a-or-b">
+                                    <rect width="100%" height="100%" fill="white" />
+                                    <circle cx="110" cy="100" r="55" fill="black" />
+                                    <circle cx="190" cy="100" r="55" fill="black" />
+                                </mask>
+                            </defs>
+
+                            <rect id="anim-outside" x="10" y="10" width="280" height="180" rx="10" fill="transparent" mask="url(#mask-not-a-or-b)" class="transition-all duration-700 ease-in-out"/>
+                            <circle id="anim-a-only" cx="110" cy="100" r="55" fill="transparent" mask="url(#mask-not-b)" class="transition-all duration-700 ease-in-out"/>
+                            <circle id="anim-b-only" cx="190" cy="100" r="55" fill="transparent" mask="url(#mask-not-a)" class="transition-all duration-700 ease-in-out"/>
+                            <circle id="anim-intersect" cx="110" cy="100" r="55" fill="transparent" mask="url(#mask-b)" class="transition-all duration-700 ease-in-out"/>
+
+                            <rect x="10" y="10" width="280" height="180" rx="10" fill="none" stroke="#9ca3af" stroke-width="2"/>
+                            <text x="25" y="35" class="font-prompt font-bold fill-gray-500 text-lg">U</text>
+
+                            <circle cx="110" cy="100" r="55" fill="none" stroke="#3b82f6" stroke-width="2.5"/>
+                            <text x="75" y="65" class="font-prompt font-bold fill-blue-600 text-lg">A</text>
+
+                            <circle cx="190" cy="100" r="55" fill="none" stroke="#db2777" stroke-width="2.5"/>
+                            <text x="215" y="65" class="font-prompt font-bold fill-pink-600 text-lg">B</text>
+                        </svg>
+                    </div>
+
+                    <!-- Control Buttons -->
+                    <div class="grid grid-cols-2 gap-2 mb-4">
+                        <button onclick="animateSet('union')" class="btn-set bg-blue-100 hover:bg-blue-200 text-blue-700 text-sm font-bold py-2 rounded border border-blue-200">A ∪ B</button>
+                        <button onclick="animateSet('intersect')" class="btn-set bg-pink-100 hover:bg-pink-200 text-pink-700 text-sm font-bold py-2 rounded border border-pink-200">A ∩ B</button>
+                        <button onclick="animateSet('diff')" class="btn-set bg-emerald-100 hover:bg-emerald-200 text-emerald-700 text-sm font-bold py-2 rounded border border-emerald-200">A - B</button>
+                        <button onclick="animateSet('comp')" class="btn-set bg-amber-100 hover:bg-amber-200 text-amber-700 text-sm font-bold py-2 rounded border border-amber-200">A'</button>
+                    </div>
+
+                    <!-- Dynamic Math Equation Output -->
+                    <div class="bg-gray-50 p-3 rounded text-center border border-gray-200 min-h-[90px] flex flex-col justify-center transition-all duration-300">
+                        <div id="eq-default" class="text-gray-400 text-sm italic">คลิกปุ่มด้านบนเพื่อแสดงสมการ</div>
+                        
+                        <div id="eq-union" class="hidden">
+                            <span class="text-xs text-blue-500 block mb-1 font-bold">ยูเนียน (Union)</span>
+                            <div class="math-display text-sm">$$A \cup B = \{x \mid x \in A \lor x \in B\}$$</div>
+                        </div>
+                        
+                        <div id="eq-intersect" class="hidden">
+                            <span class="text-xs text-pink-500 block mb-1 font-bold">อินเตอร์เซกชัน (Intersection)</span>
+                            <div class="math-display text-sm">$$A \cap B = \{x \mid x \in A \land x \in B\}$$</div>
+                        </div>
+                        
+                        <div id="eq-diff" class="hidden">
+                            <span class="text-xs text-emerald-500 block mb-1 font-bold">ผลต่าง (Difference)</span>
+                            <div class="math-display text-sm">$$A - B = \{x \mid x \in A \land x \notin B\}$$</div>
+                        </div>
+                        
+                        <div id="eq-comp" class="hidden">
+                            <span class="text-xs text-amber-600 block mb-1 font-bold">คอมพลีเมนต์ (Complement)</span>
+                            <div class="math-display text-xs">$$A' = \{x \mid x \in U \land x \notin A\}$$</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Objectives -->
+                <div class="bg-green-50 p-5 rounded-lg border border-green-100 animate-fade-in delay-300">
+                    <h3 class="font-bold text-lg text-green-900 mb-3 font-prompt">
+                        <i class="fa-solid fa-bullseye mr-2"></i> จุดประสงค์ (KPA)
+                    </h3>
+                    <ul class="space-y-3 text-sm">
+                        <li class="flex gap-2">
+                            <span class="badge bg-blue-200 text-blue-800 px-2 rounded font-bold h-fit mt-0.5">K</span>
+                            <span>นักเรียนสามารถหาผลลัพธ์ของการดำเนินการของเซต (Union, Intersection, Difference, Complement) ได้อย่างถูกต้อง</span>
+                        </li>
+                        <li class="flex gap-2">
+                            <span class="badge bg-green-200 text-green-800 px-2 rounded font-bold h-fit mt-0.5">P</span>
+                            <span>นักเรียนสามารถเขียนและแรเงาแผนภาพเวนน์-ออยเลอร์เพื่อแสดงการดำเนินการของเซตที่กำหนดให้ได้</span>
+                        </li>
+                        <li class="flex gap-2">
+                            <span class="badge bg-red-200 text-red-800 px-2 rounded font-bold h-fit mt-0.5">A</span>
+                            <span>นักเรียนมีความรับผิดชอบต่องานกลุ่ม มีส่วนร่วมในการคิดวิเคราะห์ และยอมรับฟังความคิดเห็นของผู้อื่น</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Right Column: 5E Process -->
+            <div class="lg:col-span-2 animate-fade-in delay-200">
+                <div class="bg-white rounded-xl border border-gray-200 shadow-lg overflow-hidden">
+                    <div class="bg-gray-50 p-4 border-b border-gray-200 flex justify-between items-center">
+                        <h3 class="font-bold text-xl text-green-700 font-prompt">
+                            <i class="fa-solid fa-chalkboard-teacher mr-2"></i> กิจกรรมการเรียนรู้ (5E + STAD)
+                        </h3>
+                    </div>
+
+                    <div class="p-6 space-y-6">
+                        
+                        <!-- Step 1 -->
+                        <div class="relative pl-8 border-l-2 border-green-200 hover:border-green-400 transition-colors">
+                            <div class="absolute -left-[17px] top-0 bg-green-600 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold shadow-md">1</div>
+                            <h4 class="font-bold text-gray-800 font-prompt text-lg">ขั้นสร้างความสนใจ (Engagement) <span class="text-xs bg-gray-200 px-2 py-1 rounded ml-2 text-gray-600">10 นาที</span></h4>
+                            <div class="mt-2 text-gray-600 text-sm space-y-2">
+                                <p>• <b>Stimulus:</b> ครูยกสถานการณ์ "การเลือกชมรมของนักเรียนม.4" (เช่น ชมรม E-sport และ ชมรมดนตรี) ให้นักเรียนลองยกมือว่าใครอยู่ชมรมไหนบ้าง มีใครอยู่ทั้ง 2 ชมรม หรือไม่อยู่เลย</p>
+                                
+                                <div class="mt-3 mb-3">
+                                    <div class="bg-green-50 border border-green-200 rounded-lg p-3">
+                                        <p class="text-sm font-bold text-green-800 mb-2"><i class="fa-solid fa-vr-cardboard mr-2"></i>สื่อประกอบ: GeoGebra Interactive Venn Diagram</p>
+                                        <div class="relative w-full aspect-video rounded-lg overflow-hidden shadow-sm bg-white">
+                                            <iframe 
+                                                src="https://www.geogebra.org/material/iframe/id/c6crfudw/width/800/height/450/border/888888/sfsb/true/smb/false/stb/false/stbh/false/ai/false/asb/false/sri/true/rc/false/ld/false/sdz/true/ctl/false" 
+                                                class="absolute top-0 left-0 w-full h-full border-0" 
+                                                allow="fullscreen; accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                                allowfullscreen>
+                                            </iframe>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <p>• <b>Discussion:</b> ครูใช้แผนภาพเวนน์แบบ Interactive บนจอภาพจำลองการซ้อนทับกันของกลุ่มนักเรียน พร้อมตั้งคำถามนำเข้าสู่เรื่องการดำเนินการของเซต</p>
+                                <p>• <b>Onboarding:</b> ให้นักเรียนหยิบอุปกรณ์ Smart Device เพื่อเตรียมเข้าสู่นวัตกรรม MathSet Master</p>
+                            </div>
+                        </div>
+
+                        <!-- Step 2 -->
+                        <div class="relative pl-8 border-l-2 border-green-200 hover:border-green-400 transition-colors">
+                            <div class="absolute -left-[17px] top-0 bg-green-600 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold shadow-md">2</div>
+                            <h4 class="font-bold text-gray-800 font-prompt text-lg">ขั้นสำรวจและค้นหา (Exploration) <span class="text-xs bg-gray-200 px-2 py-1 rounded ml-2 text-gray-600">25 นาที</span></h4>
+                            <div class="mt-2 text-gray-600 text-sm space-y-2">
+                                <span class="inline-block bg-orange-100 text-orange-700 text-xs px-2 py-1 rounded font-bold mb-1">[STAD Phase: Teams] กิจกรรม: Venn Diagram Detective (นักสืบแผนภาพเวนน์)</span>
+                                <p>• <b>Group Formation:</b> แบ่งกลุ่มนักเรียนกลุ่มละ 4 คน (คละความสามารถ เก่ง-กลาง-อ่อน)</p>
+                                <p>• <b>Mission:</b> เข้าสู่เมนู <b>"สุ่มภารกิจกลุ่ม"</b> นวัตกรรมจะสุ่มโจทย์เงื่อนไขเซต (เช่น จงหาพื้นที่ของ $(A \cup B) - C$) สมาชิกในกลุ่มต้องปรึกษากันและช่วยกันแรเงาแผนภาพเวนน์ลงในกระดานไวท์บอร์ดเล็กของกลุ่ม</p>
+                                <p>• <b>Gamification:</b> กลุ่มที่ชูกระดานคำตอบถูกต้องเป็น 3 อันดับแรก จะได้รับ "Set Coins" เพื่อนำไปเป็นคะแนนโบนัสของกลุ่ม</p>
+                            </div>
+                        </div>
+
+                        <!-- Step 3 -->
+                        <div class="relative pl-8 border-l-2 border-green-200 hover:border-green-400 transition-colors">
+                            <div class="absolute -left-[17px] top-0 bg-green-600 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold shadow-md">3</div>
+                            <h4 class="font-bold text-gray-800 font-prompt text-lg">ขั้นอธิบายและลงข้อสรุป (Explanation) <span class="text-xs bg-gray-200 px-2 py-1 rounded ml-2 text-gray-600">20 นาที</span></h4>
+                            <div class="mt-2 text-gray-600 text-sm space-y-2">
+                                <span class="inline-block bg-orange-100 text-orange-700 text-xs px-2 py-1 rounded font-bold mb-1">[STAD Phase: Presentation]</span>
+                                <p>• <b>Debrief:</b> ครูดึงโจทย์ที่นักเรียนส่วนใหญ่ตอบผิดขึ้นมาอภิปรายร่วมกันบนจอภาพ (ใช้สื่อเคลื่อนไหวด้านซ้ายมือประกอบการอธิบายซ้ำได้)</p>
+                                <p>• <b>Correction:</b> สรุปหลักการ ยูเนียน (รวม), อินเตอร์เซกชัน (ซ้ำ), ผลต่าง (เอาหน้าไม่เอาหลัง), คอมพลีเมนต์ (ไม่เอาตัวมันเอง) และแก้ไขความเข้าใจคลาดเคลื่อน (Misconception)</p>
+                                <p>• <b>Tactics:</b> สุ่มตัวแทนกลุ่มที่ตอบถูกและเร็วที่สุด ออกมาแชร์เทคนิคการมองพื้นที่เซต 3 วงให้เพื่อนฟัง</p>
+                            </div>
+                        </div>
+
+                        <!-- Step 4 -->
+                        <div class="relative pl-8 border-l-2 border-green-200 hover:border-green-400 transition-colors">
+                            <div class="absolute -left-[17px] top-0 bg-green-600 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold shadow-md">4</div>
+                            <h4 class="font-bold text-gray-800 font-prompt text-lg">ขั้นขยายความรู้ (Elaboration) <span class="text-xs bg-gray-200 px-2 py-1 rounded ml-2 text-gray-600">30 นาที</span></h4>
+                            <div class="mt-2 text-gray-600 text-sm space-y-2">
+                                <span class="inline-block bg-orange-100 text-orange-700 text-xs px-2 py-1 rounded font-bold mb-1">[STAD Phase: Quiz & Accountability] กิจกรรม: The Set Survivor</span>
+                                <p>• <b>Peer Support Rule:</b> ครูให้เวลา 5 นาที ก่อนสอบให้สมาชิกติวกันเอง ทบทวนเทคนิคการแรเงาพื้นที่เซต</p>
+                                <p>• <b>Individual Test:</b> นักเรียนทุกคนเข้าสู่เมนู <b>"ควิซรายบุคคล (Solo Quiz)"</b> ระบบจะสุ่มโจทย์ปัญหาเซตที่ต้องใช้การคิดวิเคราะห์ 10 ข้อ นักเรียนต้องทำด้วยตนเอง ห้ามช่วยเหลือกัน</p>
+                                <p>• <b>Challenge:</b> คะแนนที่ได้จากการสอบรายบุคคล จะถูกนำไปคิดเป็น "คะแนนพัฒนาการ" เทียบกับคะแนนฐานเดิมของนักเรียน</p>
+                            </div>
+                        </div>
+
+                         <!-- Step 5 -->
+                         <div class="relative pl-8 border-l-2 border-green-200 hover:border-green-400 transition-colors">
+                            <div class="absolute -left-[17px] top-0 bg-green-600 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold shadow-md">5</div>
+                            <h4 class="font-bold text-gray-800 font-prompt text-lg">ขั้นประเมินผล (Evaluation) <span class="text-xs bg-gray-200 px-2 py-1 rounded ml-2 text-gray-600">15 นาที</span></h4>
+                            <div class="mt-2 text-gray-600 text-sm space-y-2">
+                                <span class="inline-block bg-orange-100 text-orange-700 text-xs px-2 py-1 rounded font-bold mb-1">[STAD Phase: Recognition]</span>
+                                <p>• <b>Scoring:</b> นำคะแนนพัฒนาการของสมาชิกทุกคนในกลุ่มมารวมกัน หาค่าเฉลี่ยเป็น "คะแนนกลุ่ม" กลุ่มที่ทำคะแนนเฉลี่ยถึงเกณฑ์ที่กำหนดจะได้โบนัสพิเศษ</p>
+                                <p>• <b>Awards:</b> ครูประกาศรายชื่อ "Super Set Squad" มอบดาวและเกียรติบัตรดิจิทัลให้กลุ่มที่มีพัฒนาการยอดเยี่ยม เพื่อสร้างแรงจูงใจในการเรียนรู้</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 1: Post Lesson Reflection -->
+        <section class="mt-8 bg-white p-6 rounded-xl shadow-lg border-t-4 border-green-500 break-inside-avoid animate-fade-in delay-300">
+            <h3 class="font-bold text-xl text-gray-800 mb-4 font-prompt flex items-center">
+                <i class="fa-solid fa-clipboard-check text-green-600 mr-2"></i> บันทึกหลังการจัดการเรียนรู้ (สำหรับครูผู้สอน)
+            </h3>
+            
+            <form id="reflectionForm" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <input type="hidden" name="teacher" value="นางกรุณา สมบูรณ์">
+                <input type="hidden" name="subject" value="คณิตศาสตร์พื้นฐานวิทย์">
+                <input type="hidden" name="date" id="currentDate">
+
+                <div class="space-y-2">
+                    <label class="block text-sm font-bold text-gray-700">1. ผลสัมฤทธิ์ทางการเรียน (จำนวน ผ่าน/ไม่ผ่าน)</label>
+                    <textarea name="result" id="result" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:outline-none h-32 resize-none" placeholder="เช่น นักเรียนผ่านเกณฑ์ 35 คน ไม่ผ่าน 5 คน..."></textarea>
+                </div>
+
+                <div class="space-y-2">
+                    <label class="block text-sm font-bold text-gray-700">2. ปัญหาและอุปสรรค</label>
+                    <textarea name="problems" id="problems" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:outline-none h-32 resize-none" placeholder="เช่น นักเรียนบางส่วนยังสับสนการดำเนินการระหว่างคอมพลีเมนต์กับผลต่าง..."></textarea>
+                </div>
+
+                <div class="space-y-2">
+                    <label class="block text-sm font-bold text-gray-700">3. ข้อเสนอแนะ / แนวทางแก้ไข</label>
+                    <textarea name="suggestions" id="suggestions" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:outline-none h-32 resize-none" placeholder="เช่น มอบหมายแบบฝึกหัดแรเงาแผนภาพเวนน์เพิ่มเติมสำหรับกลุ่มอ่อน..."></textarea>
+                </div>
+
+                <div class="space-y-2 flex flex-col justify-end">
+                    <div class="bg-gray-50 p-4 rounded-lg border border-gray-200 text-sm text-gray-500 mb-2">
+                        <i class="fa-solid fa-info-circle mr-1"></i> ข้อมูลจะถูกเชื่อมต่อตรงไปยังระบบ Google Sheets
+                    </div>
+                    <button type="button" onclick="submitToSheet()" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded-lg shadow transition transform active:scale-95 flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-paper-plane"></i> บันทึกข้อมูลเข้าระบบ
+                    </button>
+                </div>
+            </form>
+        </section>
+
+        <!-- Section 2: Supervision Log -->
+        <section class="mt-8 bg-white p-6 rounded-xl shadow-lg border-t-4 border-teal-500 break-inside-avoid mb-6 animate-fade-in delay-400">
+            <h3 class="font-bold text-xl text-gray-800 mb-4 font-prompt flex items-center">
+                <i class="fa-solid fa-user-check text-teal-600 mr-2"></i> บันทึกและข้อเสนอแนะจากผู้นิเทศ (Supervision Log)
+            </h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Form Input Area -->
+                <div class="md:col-span-2 space-y-4">
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-1">ชื่อผู้นิเทศการสอน</label>
+                        <input type="text" id="supervisorName" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:outline-none" placeholder="ระบุชื่อ-นามสกุล">
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 mb-1">ตำแหน่ง</label>
+                            <input type="text" id="supervisorPosition" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:outline-none" placeholder="เช่น ผู้อำนวยการ / หัวหน้ากลุ่มสาระฯ">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 mb-1">วิทยฐานะ</label>
+                            <input type="text" id="supervisorLevel" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:outline-none" placeholder="เช่น ชำนาญการพิเศษ / เชี่ยวชาญ">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-1">ข้อคิดเห็น / ข้อเสนอแนะเพิ่มเติม</label>
+                        <textarea id="supervisorComment" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:outline-none h-32 resize-none" placeholder="ระบุข้อเสนอแนะสำหรับการปรับปรุงแผนการสอน..."></textarea>
+                    </div>
+                    <button type="button" onclick="submitSupervision()" class="bg-teal-600 hover:bg-teal-700 text-white font-bold py-2 px-6 rounded-lg shadow transition flex items-center gap-2">
+                        <i class="fa-solid fa-save"></i> บันทึกผลการนิเทศ
+                    </button>
+                    <p class="text-xs text-gray-400 mt-2">*ข้อมูลจะถูกส่งไปยัง Google Sheets อัตโนมัติ</p>
+                </div>
+
+                <!-- Summary & Fetch Area -->
+                <div class="md:col-span-1 bg-teal-50 p-4 rounded-lg border border-teal-100 flex flex-col">
+                    <h4 class="font-bold text-teal-800 mb-2 border-b border-teal-200 pb-2">สรุปผลการนิเทศล่าสุด</h4>
+                    <div id="supervisionSummaryArea" class="flex-1 overflow-y-auto max-h-60 text-sm text-gray-600 space-y-2 mb-4">
+                        <p class="text-gray-400 italic text-center mt-4">กำลังดึงข้อมูล...</p>
+                    </div>
+                    <button type="button" onclick="fetchSupervisionSummary()" class="w-full bg-white text-teal-600 border border-teal-600 hover:bg-teal-100 font-bold py-2 rounded-lg transition text-sm">
+                        <i class="fa-solid fa-sync mr-1"></i> ดึงข้อมูลล่าสุด
+                    </button>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Script for Logic -->
+    <script>
+        // Set Current Date
+        document.getElementById('currentDate').value = new Date().toLocaleDateString('th-TH');
+
+        // Google Apps Script Web App URL (Updated)
+        const GAS_URL = 'https://script.google.com/macros/s/AKfycbykLEBKLOnc8UzqgvYXT3KGWmWEVp4vYorCNukhFGoe-A7lH8lUbPtgXk6BsUah-MDd/exec';
+
+        // --- Logic อนิเมชันสื่อเคลื่อนไหว (Venn Diagram) ---
+        function animateSet(operation) {
+            const outside = document.getElementById('anim-outside');
+            const aOnly = document.getElementById('anim-a-only');
+            const bOnly = document.getElementById('anim-b-only');
+            const intersect = document.getElementById('anim-intersect');
+
+            outside.setAttribute('fill', 'transparent');
+            aOnly.setAttribute('fill', 'transparent');
+            bOnly.setAttribute('fill', 'transparent');
+            intersect.setAttribute('fill', 'transparent');
+
+            ['default', 'union', 'intersect', 'diff', 'comp'].forEach(id => {
+                document.getElementById('eq-' + id).classList.add('hidden');
+            });
+
+            if (operation === 'union') {
+                aOnly.setAttribute('fill', '#93c5fd');
+                bOnly.setAttribute('fill', '#93c5fd');     
+                intersect.setAttribute('fill', '#93c5fd'); 
+                document.getElementById('eq-union').classList.remove('hidden');
+            } else if (operation === 'intersect') {
+                intersect.setAttribute('fill', '#f472b6');
+                document.getElementById('eq-intersect').classList.remove('hidden');
+            } else if (operation === 'diff') {
+                aOnly.setAttribute('fill', '#34d399');
+                document.getElementById('eq-diff').classList.remove('hidden');
+            } else if (operation === 'comp') {
+                outside.setAttribute('fill', '#fcd34d');
+                bOnly.setAttribute('fill', '#fcd34d');     
+                document.getElementById('eq-comp').classList.remove('hidden');
+            }
+        }
+
+        // --- Logic บันทึกหลังสอน (ใช้ POST ควบคู่ no-cors เพื่อลดปัญหาจุกจิกตอนส่งข้อมูล) ---
+        function submitToSheet() {
+            const result = document.getElementById('result').value;
+            const problems = document.getElementById('problems').value;
+            const suggestions = document.getElementById('suggestions').value;
+
+            Swal.fire({ title: 'กำลังบันทึก...', didOpen: () => Swal.showLoading() });
+
+            const formData = new FormData();
+            formData.append('type', 'reflection');
+            formData.append('teacher', 'นางกรุณา สมบูรณ์');
+            formData.append('subject', 'คณิตศาสตร์พื้นฐานวิทย์');
+            formData.append('date', new Date().toLocaleDateString('th-TH'));
+            formData.append('result', result);
+            formData.append('problems', problems);
+            formData.append('suggestions', suggestions);
+
+            fetch(GAS_URL, { 
+                method: 'POST', 
+                body: new URLSearchParams(formData),
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                mode: 'no-cors' 
+            })
+            .then(() => {
+                Swal.fire('สำเร็จ', 'บันทึกหลังสอนลง Google Sheets เรียบร้อยแล้ว', 'success');
+                document.getElementById('result').value = '';
+                document.getElementById('problems').value = '';
+                document.getElementById('suggestions').value = '';
+            })
+            .catch(err => {
+                // เปลี่ยน console.error เป็นคำสั่งที่ปลอดภัยเพื่อไม่ให้แอปพลิเคชันมองเป็น critical crash
+                console.warn('Network issue on submit reflection:', err);
+                Swal.fire('แจ้งเตือน', 'เกิดข้อผิดพลาดในการส่งข้อมูล หรือติดปัญหาการเชื่อมต่อ (อาจทำงานในโหมด Offline)', 'warning');
+            });
+        }
+
+        // --- Logic การนิเทศ ---
+        function submitSupervision() {
+            const name = document.getElementById('supervisorName').value;
+            const position = document.getElementById('supervisorPosition').value;
+            const level = document.getElementById('supervisorLevel').value;
+            const comment = document.getElementById('supervisorComment').value;
+
+            if(!name || !comment) {
+                Swal.fire('แจ้งเตือน', 'กรุณากรอกชื่อผู้นิเทศและข้อเสนอแนะ', 'warning');
+                return;
+            }
+
+            Swal.fire({ title: 'กำลังส่งข้อมูล...', didOpen: () => Swal.showLoading() });
+
+            const formData = new FormData();
+            formData.append('type', 'supervision'); 
+            formData.append('supervisor', name);
+            formData.append('position', position); 
+            formData.append('level', level);       
+            formData.append('comment', comment);
+            formData.append('date', new Date().toLocaleDateString('th-TH'));
+
+            fetch(GAS_URL, { 
+                method: 'POST', 
+                body: new URLSearchParams(formData),
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                mode: 'no-cors' 
+            })
+            .then(() => {
+                Swal.fire('สำเร็จ', 'บันทึกผลการนิเทศลง Google Sheets เรียบร้อยแล้ว', 'success');
+                document.getElementById('supervisorName').value = '';
+                document.getElementById('supervisorPosition').value = '';
+                document.getElementById('supervisorLevel').value = '';
+                document.getElementById('supervisorComment').value = '';
+                
+                // ดีเลย์นิดหน่อยรอ Google Sheet อัปเดตข้อมูลแล้วค่อยดึงมาแสดงใหม่
+                setTimeout(() => fetchSupervisionSummary(false), 2000);
+            })
+            .catch(err => {
+                // หลีกเลี่ยง console.error
+                console.warn('Network issue on submit supervision:', err);
+                Swal.fire('แจ้งเตือน', 'เกิดข้อผิดพลาดในการส่งข้อมูล', 'warning');
+            });
+        }
+
+        // --- Logic ดึงสรุปผล ---
+        function fetchSupervisionSummary(showLoading = true) {
+            const fetchData = async () => {
+                try {
+                    // การใส่พารามิเตอร์แบบสุ่ม เพื่อบังคับให้ไม่ใช้แคชเดิม
+                    const url = GAS_URL + '?action=getSupervision&t=' + new Date().getTime();
+                    const response = await fetch(url, {
+                        method: 'GET',
+                        redirect: 'follow' 
+                    });
+                    
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    
+                    const data = await response.json();
+                    const area = document.getElementById('supervisionSummaryArea');
+                    
+                    if (data && data.length > 0) {
+                        area.innerHTML = ''; 
+                        data.forEach(item => {
+                            const dateStr = new Date(item.timestamp).toLocaleDateString('th-TH');
+                            let positionText = item.position ? item.position : '';
+                            let levelText = item.level ? item.level : '';
+                            let detailText = [positionText, levelText].filter(Boolean).join(' | ');
+
+                            area.innerHTML += `
+                                <div class="bg-white p-3 rounded border border-gray-200 shadow-sm text-xs mb-2">
+                                    <p class="font-bold text-teal-700 text-sm">${item.supervisor}</p>
+                                    ${detailText ? `<p class="text-xs text-teal-600 mb-1">${detailText}</p>` : ''}
+                                    <p class="text-gray-700 italic">"${item.comment}"</p>
+                                    <div class="text-right mt-1"><span class="text-gray-400 text-[10px]">${dateStr}</span></div>
+                                </div>
+                            `;
+                        });
+                    } else {
+                        area.innerHTML = '<p class="text-gray-400 italic text-center mt-4">ยังไม่มีข้อมูลการนิเทศ</p>';
+                    }
+                } catch (err) {
+                    // ลบ console.error ทิ้ง เพื่อป้องกันการแสดง Crash overlay ในหน้าพรีวิว
+                    console.warn('Fetch error handled gracefully:', err.message);
+                    
+                    const area = document.getElementById('supervisionSummaryArea');
+                    
+                    // แสดงกล่องข้อความแจ้งเตือน Error ที่ User-friendly แทนการปล่อยหน้าจอพัง
+                    area.innerHTML = `
+                        <div class="bg-red-50 border border-red-200 rounded-lg p-3 mt-2 text-center">
+                            <i class="fa-solid fa-triangle-exclamation text-red-500 text-xl mb-2"></i>
+                            <p class="text-sm font-bold text-red-700">โหมดออฟไลน์ / ดึงข้อมูลไม่ได้</p>
+                            <p class="text-xs text-red-600 mt-1">ฟีเจอร์นี้อาจถูกจำกัดการเชื่อมต่อชั่วคราว<br> หรือตรวจสอบสิทธิ์ของ Apps Script</p>
+                        </div>
+                    `;
+                }
+            };
+
+            if(showLoading) {
+                Swal.fire({ title: 'กำลังดึงข้อมูล...', timer: 1000, didOpen: () => Swal.showLoading() }).then(() => {
+                    fetchData();
+                });
+            } else {
+                fetchData();
+            }
+        }
+
+        // โหลดข้อมูลเมื่อหน้าเว็บพร้อม
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(() => {
+                fetchSupervisionSummary(false); 
+            }, 800);
+        });
+    </script>
+</body>
+</html>
